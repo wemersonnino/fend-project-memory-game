@@ -39,9 +39,10 @@ function shuffle(array) {
 
 ///* criando ouvinte click escolhe a carta.
 
-let clickTest = $('li');
+let clickView, clickHit, clickMiss, qtdClick, clicksMotion;
 
-clickTest.click(function(){
-    $(this).toggleClass('match');
-   console.log('teste <li>'); 
+clickView = $('ul.deck');
+clickView.on('click', '.card', function(event) {
+    $(this).addClass('match flipInY');
+    console.log('teste');   
 });
