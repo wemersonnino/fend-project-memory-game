@@ -39,10 +39,22 @@ function shuffle(array) {
 
 ///* criando ouvinte click escolhe a carta.
 
-let clickView, clickHit, clickMiss, qtdClick, clicksMotion;
+let clickView, clickAtual, clickHit, clickMiss, qtdClick, clicksMotion;
 
 clickView = $('ul.deck');
 clickView.on('click', '.card', function(event) {
-    $(this).addClass('match flipInY');
-    console.log('teste');   
+    //$(this).addClass('match flipInY');
+    console.log('teste');  
+
+    //if (this === ) {}; 
 });
+
+///* criando acesso a lista de icones para criar a condicional de teste
+
+clickAtual = $('li.card').children().find('i');
+
+console.log(clickAtual);
+
+clickHit = $(clickAtual).closest('i').find('selector')
+
+console.log(clickHit);
