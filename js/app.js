@@ -12,7 +12,8 @@
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+            temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -42,19 +43,19 @@ function shuffle(array) {
 let clickView, clickAtual, clickHit, clickMiss, qtdClick, clicksMotion;
 
 clickView = $('ul.deck');
-clickView.on('click', '.card', function(event) {
-    //$(this).addClass('match flipInY');
-    console.log('teste');  
 
-    //if (this === ) {}; 
-});
-
+let view = {
+    clicou: clickView.on('click', '.card', function (event) {
+        //$(this).toggleClass('match flipInY');
+        console.log('teste');
+    })
+};
 ///* criando acesso a lista de icones para criar a condicional de teste
-
-clickAtual = $('li.card').children().find('i');
-
-console.log(clickAtual);
-
-clickHit = $(clickAtual).closest('i').find('selector')
-
-console.log(clickHit);
+clickAtual = $('li.card').find('i');
+        let array = [];
+        clickAtual.each(function (i, e) {
+            const c = e.className.split(' ')[1];
+            return clickHit = array.push(c);
+        });
+        console.log(array);
+        console.log(clickHit);
