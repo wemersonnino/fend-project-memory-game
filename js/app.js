@@ -40,3 +40,12 @@ function shuffle(array) {
 
 ///* Variaveis globais
 let clickView, clickAtual, clickHit, clickMiss, qtdClick, clicksMotion, arrayBoxCard;
+
+///* criando acesso a lista de icones para criar a condicional de teste
+clickAtual = $('li.card').find('i');
+        let array = [];
+        clickAtual.each(function (i, e) {
+            const c = e.className.split(' ')[1];
+            return clickHit = array.push(c);
+        });
+        console.log(array);
