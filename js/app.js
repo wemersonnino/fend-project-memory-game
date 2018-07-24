@@ -70,3 +70,16 @@ let timer = {
 let musicVictory = {
     $('audio').attr('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3' )
 }
+
+///* Chamada do evento principal.
+
+///* functions a serem chamadas nos clicks
+
+const iniciarTime = function(){
+    if(timer.seconds === 59){
+        time.minutes++;
+        time.seconds = 0;
+    } else {
+        time.seconds++;
+    }
+} //Função de intervalo a ser chamada a cada segundo
