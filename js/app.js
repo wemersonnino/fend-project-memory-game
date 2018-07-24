@@ -46,7 +46,7 @@ clickView = $('ul.deck');
 
 let view = {
     clicou: clickView.on('click', '.card', function (event) {
-        //$(this).toggleClass('match flipInY');
+        $(this).toggleClass('match flipInY');
         console.log('teste');
     })
 };
