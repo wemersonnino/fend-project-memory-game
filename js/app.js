@@ -67,19 +67,48 @@ let timer = {
     minutes: 0,
     clearTime: -1
 };
-let musicVictory = {
-    $('audio').attr('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3' )
-}
+//let musicVictory = {
+//    $('.audio').attr('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3' )
+//};
 
 ///* Chamada do evento principal.
 
-///* functions a serem chamadas nos clicks
-
-const iniciarTime = function(){
-    if(timer.seconds === 59){
-        time.minutes++;
-        time.seconds = 0;
+var startTimer = function() {
+    if (timer.seconds === 59) {
+        timer.minutes++;
+        timer.seconds = 0;
     } else {
-        time.seconds++;
+        timer.seconds++;
     }
-} //Função de intervalo a ser chamada a cada segundo
+
+    // Ensure that single digit seconds are preceded with a 0
+    var formattedSec = "0";
+    if (timer.seconds < 10) {
+        formattedSec += timer.seconds
+    } else {
+        formattedSec = String(timer.seconds);
+    }
+
+    var time = String(timer.minutes) + ":" + formattedSec;
+    $(".timer").text(time);
+};
+
+function resetTimer() {
+    clearInterval(timer.clearTime);
+    timer.seconds = 0;
+    timer.minutes = 0;
+    $(".timer").text("0:00");
+
+    timer.clearTime = setInterval(startTimer, 1000);
+};
+
+///* random cart e update doc html
+function updateCards() {
+    deck = shuffle(deck);
+    let index = 0;
+    $.each('.card i', function() {
+        $(this).attr('class', 'fa' + deck[index]);
+        index++;
+    });
+    resetTime();
+}
