@@ -49,3 +49,24 @@ clickAtual = $('li.card').find('i');
             return clickHit = array.push(c);
         });
         console.log(array);
+
+///* array list p/ teste condicional
+clickHit = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-anchor",
+             "fa-leaf", "fa-bicycle", "fa-diamond", "fa-bomb", "fa-leaf", "fa-bomb", "fa-bolt",
+             "fa-bicycle", "fa-paper-plane-o", "fa-cube"];
+
+console.log(clickHit);
+
+///* Variáveis de estado do jogo
+let equal = 0;
+let open = [];
+let moveCounter = 0;
+let numStars = 3;
+let timer = {
+    seconds: 0,
+    minutes: 0,
+    clearTime: -1
+};
+let musicVictory = {
+    $('audio').attr('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3' )
+}
