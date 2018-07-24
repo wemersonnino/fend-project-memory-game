@@ -38,24 +38,5 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-///* criando ouvinte click escolhe a carta.
-
-let clickView, clickAtual, clickHit, clickMiss, qtdClick, clicksMotion;
-
-clickView = $('ul.deck');
-
-let view = {
-    clicou: clickView.on('click', '.card', function (event) {
-        //$(this).toggleClass('match flipInY');
-        console.log('teste');
-    })
-};
-///* criando acesso a lista de icones para criar a condicional de teste
-clickAtual = $('li.card').find('i');
-        let array = [];
-        clickAtual.each(function (i, e) {
-            const c = e.className.split(' ')[1];
-            return clickHit = array.push(c);
-        });
-        console.log(array);
-        console.log(clickHit);
+///* Variaveis globais
+let clickView, clickAtual, clickHit, clickMiss, qtdClick, clicksMotion, arrayBoxCard;
