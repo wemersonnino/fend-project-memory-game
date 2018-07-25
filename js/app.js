@@ -127,3 +127,13 @@ let resetOpen = function() {
     });
     open = [];
 };
+///* Resetando a pagina HTML
+let resetGame = function() {
+    open = [];
+    coincide = 0;
+    moveCounter = 0;
+    updateMoveCounter();
+    $(".card").attr("class", "card");
+    updateCards();
+    resetStars();
+};
