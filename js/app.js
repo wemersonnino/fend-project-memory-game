@@ -91,3 +91,12 @@ function isValid(card) {
     return !(card.hasClass("open") || card.hasClass("match"));
 };
 
+///* Retorna se os cartões atualmente abertos estão certos ou não
+function checkMatch() {
+    if (open[0].children().attr("class") === open[1].children().attr("class")) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
