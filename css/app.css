@@ -107,3 +107,13 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.flipInY{
+    animation-name: flipInY;
+    animation-duration: 1s;
+}
+
+.bounce{
+    animation-name: flipInY;
+    animation-duration: 1s;
+}

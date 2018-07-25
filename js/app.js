@@ -175,4 +175,4 @@ $(".card").click(onClick);
 $(".restart").click(resetGame);
 
 ///* Start tornando aleatório no carregamento da página
-$(updateCards);
+//$(updateCards);
