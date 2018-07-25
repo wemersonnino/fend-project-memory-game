@@ -77,4 +77,11 @@ function resetStars() {
     $(".stars").text(String(numStars));
 };
 
+///* Atualiza número de movimentos na <tag>
+function updateMoveCounter() {
+    $(".moves").text(moveCounter);
 
+    if (moveCounter === normal || moveCounter === medium) {
+        removeStar();
+    }
+};
