@@ -38,77 +38,12 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-///* Variaveis globais
-let clickView, clickAtual, clickHit, clickMiss, qtdClick, clicksMotion, arrayBoxCard;
-
 ///* criando acesso a lista de icones para criar a condicional de teste
 clickAtual = $('li.card').find('i');
-        let array = [];
-        clickAtual.each(function (i, e) {
-            const c = e.className.split(' ')[1];
-            return clickHit = array.push(c);
-        });
-        console.log(array);
+let cards = [];
+clickAtual.each(function (i, e) {
+    const c = e.className.split(' ')[1];
+    return clickHit = cards.push(c);
+});
+console.log(cards);
 
-///* array list p/ teste condicional
-clickHit = ["fa-diamond", "fa-paper-plane-o", "fa-anchor", "fa-bolt", "fa-cube", "fa-anchor",
-             "fa-leaf", "fa-bicycle", "fa-diamond", "fa-bomb", "fa-leaf", "fa-bomb", "fa-bolt",
-             "fa-bicycle", "fa-paper-plane-o", "fa-cube"];
-
-console.log(clickHit);
-
-///* Variáveis de estado do jogo
-let equal = 0;
-let open = [];
-let moveCounter = 0;
-let numStars = 3;
-let timer = {
-    seconds: 0,
-    minutes: 0,
-    clearTime: -1
-};
-//let musicVictory = {
-//    $('.audio').attr('src', 'http://www.soundjay.com/misc/sounds/bell-ringing-01.mp3' )
-//};
-
-///* Chamada do evento principal.
-
-var startTimer = function() {
-    if (timer.seconds === 59) {
-        timer.minutes++;
-        timer.seconds = 0;
-    } else {
-        timer.seconds++;
-    }
-
-    // Ensure that single digit seconds are preceded with a 0
-    var formattedSec = "0";
-    if (timer.seconds < 10) {
-        formattedSec += timer.seconds
-    } else {
-        formattedSec = String(timer.seconds);
-    }
-
-    var time = String(timer.minutes) + ":" + formattedSec;
-    $(".timer").text(time);
-};
-
-function resetTimer() {
-    clearInterval(timer.clearTime);
-    timer.seconds = 0;
-    timer.minutes = 0;
-    $(".timer").text("0:00");
-
-    timer.clearTime = setInterval(startTimer, 1000);
-};
-
-///* random cart e update doc html
-function updateCards() {
-    deck = shuffle(deck);
-    let index = 0;
-    $.each('.card i', function() {
-        $(this).attr('class', 'fa' + deck[index]);
-        index++;
-    });
-    resetTime();
-}
