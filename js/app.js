@@ -158,3 +158,7 @@ let onClick = function () {
         }
     }
 };
+
+///* Inicializar ouvintes de eventos
+$(".card").click(onClick);
+$(".restart").click(resetGame);
