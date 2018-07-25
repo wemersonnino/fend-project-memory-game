@@ -41,6 +41,7 @@ function shuffle(array) {
 ///* criando acesso a lista de icones para criar a condicional de teste
 clickAtual = $('li.card').find('i');
 let cards = [];
+
 clickAtual.each(function (i, e) {
     const c = e.className.split(' ')[1];
     return clickHit = cards.push(c);
@@ -52,3 +53,12 @@ const arrayCards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-pl
     "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
     "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
 
+///* Variaveis de estado do game
+let open = [];
+let matched = 0;
+let moveCounter = 0;
+let numStars = 3;
+
+///* Número máximo de movimentos de estrela
+let normal = 15;
+let medium = 20;
