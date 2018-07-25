@@ -63,6 +63,17 @@ let numStars = 3;
 let normal = 15;
 let medium = 20;
 
+///* Randomizes cards no HTML
+function updateCards() {
+    coincide = shuffle(coincide);
+    var index = 0;
+    $.each($(".card i"), function(){
+      $(this).attr("class", "fa " + coincide[index]);
+      index++;
+    });
+    resetTimer();
+};
+
 ///* Remove o último indice das estrelas
 function removeStar() {
     $(".fa-star").last().attr("class", "fa fa-star-o");
@@ -162,3 +173,6 @@ let onClick = function () {
 ///* Inicializar ouvintes de eventos
 $(".card").click(onClick);
 $(".restart").click(resetGame);
+
+///* Start tornando aleatório no carregamento da página
+$(updateCards);
