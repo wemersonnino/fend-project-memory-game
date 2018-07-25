@@ -62,3 +62,11 @@ let numStars = 3;
 ///* Número máximo de movimentos de estrela
 let normal = 15;
 let medium = 20;
+
+///* Remove o último indice das estrelas
+function removeStar() {
+    $(".fa-star").last().attr("class", "fa fa-star-o");
+    numStars--;
+    $(".stars").text(String(numStars));
+};
+
