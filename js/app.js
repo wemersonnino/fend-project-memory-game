@@ -70,3 +70,11 @@ function removeStar() {
     $(".stars").text(String(numStars));
 };
 
+///* Restaura os ícones da estrelas para 3 stars
+function resetStars() {
+    $(".fa-star-o").attr("class", "fa fa-star");
+    numStars = 3;
+    $(".stars").text(String(numStars));
+};
+
+
