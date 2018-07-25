@@ -117,3 +117,13 @@ let setMatch = function() {
     open = [];
     coincide += 2;
 };
+
+///* Define cards abertos no momento e volta els ao estado padrão
+let resetOpen = function() {
+    open.forEach(function(card) {
+        card.toggleClass("open");
+        card.toggleClass("show");
+        card.toggleClass("bounce");
+    });
+    open = [];
+};
