@@ -55,7 +55,7 @@ const arrayCards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-pl
 
 ///* Variaveis de estado do game
 let open = [];
-let matched = 0;
+let coincide = 0;
 let moveCounter = 0;
 let numStars = 3;
 
@@ -100,3 +100,20 @@ function checkMatch() {
     }
 };
 
+///* Retorna a condição de Hit
+function hasWon() {
+    if (coincide === 16) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+///* Verifica cards abertos no momento e qual o estado de jogo deles, verifica a condição de hit
+let setMatch = function() {
+    open.forEach(function(card) {
+        card.addClass("match");
+    });
+    open = [];
+    coincide += 2;
+};
