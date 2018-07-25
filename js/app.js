@@ -68,14 +68,16 @@ function removeStar() {
     $(".fa-star").last().attr("class", "fa fa-star-o");
     numStars--;
     $(".stars").text(String(numStars));
-};
+}
+;
 
 ///* Restaura os ícones da estrelas para 3 stars
 function resetStars() {
     $(".fa-star-o").attr("class", "fa fa-star");
     numStars = 3;
     $(".stars").text(String(numStars));
-};
+}
+;
 
 ///* Atualiza número de movimentos na <tag>
 function updateMoveCounter() {
@@ -84,12 +86,14 @@ function updateMoveCounter() {
     if (moveCounter === normal || moveCounter === medium) {
         removeStar();
     }
-};
+}
+;
 
 ///* Verifica se o cartão é um movimento válido
 function isValid(card) {
     return !(card.hasClass("open") || card.hasClass("match"));
-};
+}
+;
 
 ///* Retorna se os cartões atualmente abertos estão certos ou não
 function checkMatch() {
@@ -98,7 +102,8 @@ function checkMatch() {
     } else {
         return false;
     }
-};
+}
+;
 
 ///* Retorna a condição de Hit
 function hasWon() {
@@ -107,11 +112,12 @@ function hasWon() {
     } else {
         return false;
     }
-};
+}
+;
 
 ///* Verifica cards abertos no momento e qual o estado de jogo deles, verifica a condição de hit
-let setMatch = function() {
-    open.forEach(function(card) {
+let setMatch = function () {
+    open.forEach(function (card) {
         card.addClass("match");
     });
     open = [];
@@ -119,8 +125,8 @@ let setMatch = function() {
 };
 
 ///* Define cards abertos no momento e volta els ao estado padrão
-let resetOpen = function() {
-    open.forEach(function(card) {
+let resetOpen = function () {
+    open.forEach(function (card) {
         card.toggleClass("open");
         card.toggleClass("show");
         card.toggleClass("bounce");
@@ -128,7 +134,7 @@ let resetOpen = function() {
     open = [];
 };
 ///* Resetando a pagina HTML
-let resetGame = function() {
+let resetGame = function () {
     open = [];
     coincide = 0;
     moveCounter = 0;
@@ -136,4 +142,19 @@ let resetGame = function() {
     $(".card").attr("class", "card");
     updateCards();
     resetStars();
+};
+
+///* Logica do click para o game
+let onClick = function () {
+    if (isValid($(this))) {
+
+        if (open.length === 0) {
+            openCard($(this));
+
+        } else if (open.length === 1) {
+            openCard($(this));
+            moveCounter++;
+            updateMoveCounter();
+        }
+    }
 };
