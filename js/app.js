@@ -85,3 +85,9 @@ function updateMoveCounter() {
         removeStar();
     }
 };
+
+///* Verifica se o cartão é um movimento válido
+function isValid(card) {
+    return !(card.hasClass("open") || card.hasClass("match"));
+};
+
