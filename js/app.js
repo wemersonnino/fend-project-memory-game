@@ -39,14 +39,15 @@ function shuffle(array) {
  */
 
 ///* criando acesso a lista de icones para criar a condicional de teste
+let open = [];
+let clickHit, opened, clickAtual;
 clickAtual = $('li.card').find('i');
 let cards = [];
+const arrayCar = 16;
+let countMove = 0;
+let stars = 3;
 
-clickAtual.each(function (i, e) {
-    const c = e.className.split(' ')[1];
-    return clickHit = cards.push(c);
-});
-console.log(cards);
+
 
 ///* Array com as classes para comparar condicional
 const arrayCards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor",
@@ -54,125 +55,48 @@ const arrayCards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-pl
     "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
 
 ///* Variaveis de estado do game
-let open = [];
-let coincide = 0;
-let moveCounter = 0;
-let numStars = 3;
 
-///* Número máximo de movimentos de estrela
-let normal = 15;
-let medium = 20;
 
-///* Randomizes cards no HTML
-function updateCards() {
-    coincide = shuffle(coincide);
-    var index = 0;
-    $.each($(".card i"), function(){
-      $(this).attr("class", "fa " + coincide[index]);
-      index++;
+function listCards() {
+    clickAtual.each(function (i, e) {
+        const c = e.className.split(' ')[1];
+        return cards.push(c);
     });
-    resetTimer();
+    console.log(cards);
+}
+
+///* Logica do click
+function clickCard() {
+    clickHit = $('.card').on('click', function() {
+        $(this).addClass('flipInY');
+        $(this).addClass('open');
+        $(this).addClass('show');
+        clicksMotion ();
+    });
 };
 
-///* Remove o último indice das estrelas
-function removeStar() {
+///* Atualiza a quantidade movimentos
+function clicksMotion () {
+  $(".moves").text(countMove);
+  
+  if(countMove <= 8){
+    countMove++;
+  }
+};
+
+///* Atualiza a quantidade de stars
+function countStar () {
     $(".fa-star").last().attr("class", "fa fa-star-o");
-    numStars--;
-    $(".stars").text(String(numStars));
+    stars--;
+    $(".stars").text(String(stars));
 }
-;
 
-///* Restaura os ícones da estrelas para 3 stars
-function resetStars() {
-    $(".fa-star-o").attr("class", "fa fa-star");
-    numStars = 3;
-    $(".stars").text(String(numStars));
-}
-;
 
-///* Atualiza número de movimentos na <tag>
-function updateMoveCounter() {
-    $(".moves").text(moveCounter);
-
-    if (moveCounter === normal || moveCounter === medium) {
-        removeStar();
-    }
-}
-;
-
-///* Verifica se o cartão é um movimento válido
-function isValid(card) {
-    return !(card.hasClass("open") || card.hasClass("match"));
-}
-;
-
-///* Retorna se os cartões atualmente abertos estão certos ou não
-function checkMatch() {
-    if (open[0].children().attr("class") === open[1].children().attr("class")) {
-        return true;
-    } else {
-        return false;
-    }
-}
-;
-
-///* Retorna a condição de Hit
-function hasWon() {
-    if (coincide === 16) {
-        return true;
-    } else {
-        return false;
-    }
-}
-;
-
-///* Verifica cards abertos no momento e qual o estado de jogo deles, verifica a condição de hit
-let setMatch = function () {
-    open.forEach(function (card) {
-        card.addClass("match");
-    });
-    open = [];
-    coincide += 2;
+window.onload = function() {
+    clickCard();
+    clicksMotion();
 };
 
-///* Define cards abertos no momento e volta els ao estado padrão
-let resetOpen = function () {
-    open.forEach(function (card) {
-        card.toggleClass("open");
-        card.toggleClass("show");
-        card.toggleClass("bounce");
-    });
-    open = [];
-};
-///* Resetando a pagina HTML
-let resetGame = function () {
-    open = [];
-    coincide = 0;
-    moveCounter = 0;
-    updateMoveCounter();
-    $(".card").attr("class", "card");
-    updateCards();
-    resetStars();
-};
-
-///* Logica do click para o game
-let onClick = function () {
-    if (isValid($(this))) {
-
-        if (open.length === 0) {
-            openCard($(this));
-
-        } else if (open.length === 1) {
-            openCard($(this));
-            moveCounter++;
-            updateMoveCounter();
-        }
-    }
-};
-
-///* Inicializar ouvintes de eventos
-$(".card").click(onClick);
-$(".restart").click(resetGame);
-
-///* Start tornando aleatório no carregamento da página
-//$(updateCards);
+$(".card").click(clickCard);
+$(".card").click(clicksMotion);
+listCards();
