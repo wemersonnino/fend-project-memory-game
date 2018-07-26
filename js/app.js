@@ -39,13 +39,13 @@ function shuffle(array) {
  */
 
 ///* criando acesso a lista de icones para criar a condicional de teste
-let open = [];
-let clickHit, opened, clickAtual;
+
+let clickHit, opened, clickAtual, star;
 clickAtual = $('li.card').find('i');
 let cards = [];
 const arrayCar = 16;
 let countMove = 0;
-let stars = 3;
+let stars = $('ul.stars').find('li').remove('li');
 
 
 
@@ -67,32 +67,33 @@ function listCards() {
 
 ///* Logica do click
 function clickCard() {
-    clickHit = $('.card').on('click', function() {
+    clickHit = $('.card').on('click', function () {
         $(this).addClass('flipInY');
         $(this).addClass('open');
         $(this).addClass('show');
-        clicksMotion ();
+        countMove++;
+        clicksMotion();
+        countStar();
     });
-};
+}
+;
 
 ///* Atualiza a quantidade movimentos
-function clicksMotion () {
-  $(".moves").text(countMove);
-  
-  if(countMove <= 8){
-    countMove++;
-  }
-};
+function clicksMotion() {
+    $(".moves").text(countMove);
 
-///* Atualiza a quantidade de stars
-function countStar () {
-    $(".fa-star").last().attr("class", "fa fa-star-o");
-    stars--;
-    $(".stars").text(String(stars));
+}
+;
+
+///* Contando estrelas e movimentos
+function countStar() {
+    $('ul.stars').append('<li><i class="fa fa-star"></i></li>');
+    let n = ('ul.stars').size();
+    $('li').html(n);
 }
 
 
-window.onload = function() {
+window.onload = function () {
     clickCard();
     clicksMotion();
 };
@@ -100,3 +101,4 @@ window.onload = function() {
 $(".card").click(clickCard);
 $(".card").click(clicksMotion);
 listCards();
+//console.log(star);
