@@ -46,6 +46,7 @@ let cards = [];
 const arrayCar = 16;
 let countMove = 0;
 let stars = $('ul.stars').find('li').remove('li');
+const quantStars = 8;
 
 
 
@@ -74,13 +75,17 @@ function clickCard() {
         countMove++;
         clicksMotion();
         countStar();
+        updateMoveCounter();
     });
 }
 ;
 
-///* Atualiza a quantidade movimentos
+///* Atualiza a quantidade movimentos e limita a quant de Stars
 function clicksMotion() {
     $(".moves").text(countMove);
+    if (countMove === 8) {
+        removeStar();
+    }
 
 }
 ;
@@ -90,6 +95,13 @@ function countStar() {
     $('ul.stars').append('<li><i class="fa fa-star"></i></li>');
     let n = ('ul.stars').size();
     $('li').html(n);
+};
+
+///* Remove a quantidade de estrelas e atualiza a pagina
+function removeStar () {
+    $('ul.stars').find('*').remove();
+    alert('quantidade de palpimetes superado');
+    location.reload();
 }
 
 
