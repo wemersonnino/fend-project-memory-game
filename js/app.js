@@ -38,79 +38,99 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-///* criando acesso a lista de icones para criar a condicional de teste
+///* Var contendo a localização dos cards
+let deck = $('.deck');
+//console.log(deck);
 
-let clickHit, opened, clickAtual, star;
-clickAtual = $('li.card').find('i');
-let cards = [];
-const arrayCar = 16;
-let countMove = 0;
-let stars = $('ul.stars').find('li').remove('li');
-const quantStars = 8;
-
-
-
-///* Array com as classes para comparar condicional
-const arrayCards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor",
-    "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
-    "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
-
-///* Variaveis de estado do game
-
-
-function listCards() {
-    clickAtual.each(function (i, e) {
-        const c = e.className.split(' ')[1];
-        return cards.push(c);
-    });
-    console.log(cards);
-}
-
-///* Logica do click
-function clickCard() {
-    clickHit = $('.card').on('click', function () {
-        $(this).addClass('flipInY');
-        $(this).addClass('open');
-        $(this).addClass('show');
-        countMove++;
-        clicksMotion();
-        countStar();
-        updateMoveCounter();
-    });
-}
-;
-
-///* Atualiza a quantidade movimentos e limita a quant de Stars
-function clicksMotion() {
-    $(".moves").text(countMove);
-    if (countMove === 8) {
-        removeStar();
+///* Random cards
+function deckRandom() {
+    let parent = $(deck);
+    let ul = parent.children();
+    while (ul.length) {
+        parent.append(ul.splice(Math.floor(Math.random() * ul.length), 1)[0]);
     }
-
 }
-;
 
-///* Contando estrelas e movimentos
-function countStar() {
-    $('ul.stars').append('<li><i class="fa fa-star"></i></li>');
-    let n = ('ul.stars').size();
-    $('li').html(n);
+///*Carregamento da pagina randomiza os cards
+window.onload = function resets() {
+    deckRandom();
+    clicked();
 };
 
-///* Remove a quantidade de estrelas e atualiza a pagina
-function removeStar () {
-    $('ul.stars').find('*').remove();
-    alert('quantidade de palpimetes superado');
+///* Reload pagina
+let reload = $('.restart');
+reload.on('click', function () {
     location.reload();
+});
+
+///* Var para obter os cards abertos
+let opened = $('.open');
+
+///* Var para conter os acertos/para as stars
+let hits = 0;
+
+///* Var para conter numnber de movimentos
+let palpites = 0;
+
+///* Var para registar os cards combinados
+let isCombined = false;
+
+let stars = false;
+
+
+//--------------init logic game-------------------
+
+///* contando os movimentos
+function countMove() {
+    let clickMotion = $("span.moves").text(palpites);
+    $(clickMotion).click(palpites++).is('.card');
 }
 
+///* função confere se o card esta aberto
+function open() {
+        if($(opened).hasClass('open')){
+            console.log('teste acertos');
+            isCombined = isCombined = true;
+            return true;
+        } else {
+            console.log('teste error');
+            isCombined = isCombined = false;
+            countMove();
+            return false;
+        }
+}
 
-window.onload = function () {
-    clickCard();
-    clicksMotion();
-};
+//function openCard(){
+//    let cardClic = $(this);
+//    if($(clicked) == true){
+//        cardClic.addClass('open show');
+//        return true;
+//    } else{
+//        $('.card').addClass('open');
+//        console.log('erro add class');
+//        return false;
+//    }
+//    open();
+//}
 
-$(".card").click(clickCard);
-$(".card").click(clicksMotion);
-listCards();
-//console.log(star);
+///* Click card
+function clicked() {
+    let clickAtual = $('.card');
+    clickAtual.on('click', function () {
+        if(clickAtual == true){
+            $(this).removeClass('open show');
+        } else{
+            $(this).addClass('flipInY open show');
+            if($(open).hasClass('.open') === true){
+               $(this).addClass('bounce match'); 
+               openCard();
+            }
+            console.log('erro add class');
+            return false;
+     }
+        
+        
+    });
+}
+
+$();
