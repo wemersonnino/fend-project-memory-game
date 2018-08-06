@@ -38,23 +38,8 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-///* Var contendo a localização dos cards
-let deck = $('.deck');
-//console.log(deck);
-
-///* Random cards
-function deckRandom() {
-    let parent = $(deck);
-    let ul = parent.children();
-    while (ul.length) {
-        parent.append(ul.splice(Math.floor(Math.random() * ul.length), 1)[0]);
-    }
-}
-
-///*Carregamento da pagina randomiza os cards
-window.onload = function resets() {
-    deckRandom();
-    clicked();
+window.onload = function(){
+    updateCards();
 };
 
 ///* Reload pagina
@@ -77,60 +62,180 @@ let isCombined = false;
 
 let stars = false;
 
+//let openCard = [];
+
 
 //--------------init logic game-------------------
 
 ///* contando os movimentos
-function countMove() {
-    let clickMotion = $("span.moves").text(palpites);
-    $(clickMotion).click(palpites++).is('.card');
-}
 
-///* função confere se o card esta aberto
-function open() {
-        if($(opened).hasClass('open')){
-            console.log('teste acertos');
-            isCombined = isCombined = true;
-            return true;
-        } else {
-            console.log('teste error');
-            isCombined = isCombined = false;
-            countMove();
-            return false;
-        }
-}
+const view = {
+    displayMove: function (move) {
+        //Metodo atualiza o number de moves
+        let moves = $('.moves');
+        move++;
+        moves.text(move);
+    },
+    displayHitStars: function (star) {
+        //Metodo remove as stars
+        let stars = $(star).children();
+        stars.remove('li');
+    },
+    displayMiss: function (location) {
+        let card = $('.card');
+        card.addClass('open', 'show');
+    }
+};
 
-//function openCard(){
-//    let cardClic = $(this);
-//    if($(clicked) == true){
-//        cardClic.addClass('open show');
-//        return true;
-//    } else{
-//        $('.card').addClass('open');
-//        console.log('erro add class');
-//        return false;
-//    }
-//    open();
-//}
+view.displayMove('1');
+view.displayHitStars('.stars');
 
-///* Click card
-function clicked() {
-    let clickAtual = $('.card');
-    clickAtual.on('click', function () {
-        if(clickAtual == true){
-            $(this).removeClass('open show');
-        } else{
-            $(this).addClass('flipInY open show');
-            if($(open).hasClass('.open') === true){
-               $(this).addClass('bounce match'); 
-               openCard();
-            }
-            console.log('erro add class');
-            return false;
-     }
-        
-        
+// Vars do game
+var open = [];
+//var palpites = 0;
+var moveCounter = 0;
+var numStars = 3;
+
+// Difficulty settings (max number of moves for each star)
+var hard = 15;
+var medium = 20;
+
+// Randomizes cards on board and updates card HTML
+function updateCards() {
+    deck = shuffle(deck);
+    var index = 0;
+    $.each($(".card i"), function(){
+      $(this).attr("class", "fa " + deck[index]);
+      index++;
     });
-}
+    //resetTimer();
+};
 
-$();
+// Remove stars
+function removeStar() {
+    $(".stars").last().attr("class", "fa fa-star-o");
+    numStars--;
+    $(".stars").text(String(numStars));
+};
+
+// Restaura as stars
+function resetStars() {
+    $(".stars").attr("class", "fa fa-star");
+    numStars = 3;
+    $(".stars").text(String(numStars));
+};
+
+// Aqui os movimentos são exibidos 
+function updateMoveCounter() {
+    $(".moves").text(moveCounter);
+
+    if (moveCounter === hard || moveCounter === medium) {
+        removeStar();
+    }
+};
+
+// Verifica se o cartão é um movimento válido (se não estiver atualmente combinado ou aberto)
+function isValid(card) {
+    return !(card.hasClass("open") || card.hasClass("bounce") || card.hasClass("match"));
+};
+
+// Retorna se os cartões atualmente abertos correspondem ou não
+function checkMatch() {
+    if (open[0].children().attr("class")===open[1].children().attr("class")) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+// Retorna se teve acerto
+function hasWon() {
+    if (palpites === 16) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+// Aqui se os cards estão abertos e se teve acerto
+var setMatch = function() {
+    open.forEach(function(card) {
+        card.addClass("match");
+    });
+    open = [];
+    palpites += 2;
+
+  
+};
+
+// Volta os cards ao estado padrão
+var resetOpen = function() {
+    open.forEach(function(card) {
+        card.toggleClass("open");
+        card.toggleClass("show");
+        card.toggleClass("flipInY");
+    });
+    open = [];
+};
+
+// Definição de cards abertos
+function openCard(card) {
+    if (!card.hasClass("open")) {
+        card.addClass("open");
+        card.addClass("show");
+        card.addClass("flipInY");
+        open.push(card);
+    }
+};
+
+
+// Reseta o game
+var resetGame = function() {
+    open = [];
+    palpites = 0;
+    moveCounter = 0;
+    updateMoveCounter();
+    $(".card").attr("class", "card");
+    updateCards();
+    resetStars();
+};
+
+// aqui resolve a logica do game
+var onClick = function() {
+    if (isValid( $(this) )) {
+
+        if (open.length === 0) {
+            openCard( $(this) );
+
+        } else if (open.length === 1) {
+            openCard( $(this) );
+            moveCounter++;
+            updateMoveCounter();
+
+            if (checkMatch()) {
+                setTimeout(setMatch, 300);
+
+            } else {
+                setTimeout(resetOpen, 700);
+
+            }
+        }
+    }
+};
+
+// Redefine o estado do game
+var playAgain = function() {
+    resetGame();
+};
+
+/*
+ * Lista de event
+ */
+
+$(".card").click(onClick);
+$(".restart").click(resetGame);
+$(".play-again").click(playAgain);
+
+// Cards aleatorios
+$(updateCards);
+
