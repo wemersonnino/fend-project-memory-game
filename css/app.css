@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -32,6 +33,7 @@ h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
+
 
 /*
  * Styles for the deck of cards
@@ -82,6 +84,7 @@ h1 {
     font-size: 33px;
 }
 
+
 /*
  * Styles for the Score Panel
  */
@@ -109,21 +112,21 @@ h1 {
     cursor: pointer;
 }
 
-.flipInY{
+.flipInY {
     animation-name: flipInY;
     animation-duration: 1s;
 }
 
-.bounce{
+.bounce {
     animation-name: flipInY;
     animation-duration: 1s;
 }
 
 
-@media only screen 
-and (min-device-width : 375px) 
-and (max-device-width : 812px)
-and (-webkit-device-pixel-ratio : 3) { 
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-device-pixel-ratio: 3) {
+    .score-panel {
+        width: 100%;
+    }
     .deck {
         width: 100%;
         height: auto;
@@ -132,41 +135,46 @@ and (-webkit-device-pixel-ratio : 3) {
         height: 11vh;
         width: 29%;
     }
-    i{
+    i {
         font-size: 3em;
     }
 }
 
-@media (max-width: 600px) 
-{
-  .deck {
+@media (max-width: 600px) {
+    .score-panel {
+        width: 100%;
+    }
+    .deck {
         width: 100%;
         min-height: auto;
     }
-    .card {
+    .deck .card {
         height: 11vh;
         width: 29%;
     }
-    i{
+    i {
         font-size: 3em;
     }
 }
 
-@media (max-width: 375px) 
-{
-  .deck {
+@media (max-width: 375px) {
+    .score-panel {
+        width: 100%;
+    }
+    .deck {
         width: 100%;
         min-height: auto;
     }
-    .card {
+    .deck .card {
         height: 11vh;
         width: 29%;
     }
-    i{
+    i {
         font-size: 3em;
     }
 }
 
-.center{
+.center img {
     margin: 0 auto;
+    width: 100%;
 }
