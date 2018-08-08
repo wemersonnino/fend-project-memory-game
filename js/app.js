@@ -62,7 +62,7 @@ let isCombined = false;
 
 let stars = false;
 
-//let openCard = [];
+let deck = $('deck');
 
 
 //--------------init logic game-------------------
@@ -87,28 +87,25 @@ const view = {
     }
 };
 
-view.displayMove('1');
-view.displayHitStars('.stars');
 
 // Vars do game
-var open = [];
+let open = [];
 //var palpites = 0;
-var moveCounter = 0;
-var numStars = 3;
+let moveCounter = 0;
+let numStars = 3;
 
 // Difficulty settings (max number of moves for each star)
-var hard = 15;
-var medium = 20;
+let hard = 15;
+let medium = 20;
 
 // Randomizes cards on board and updates card HTML
 function updateCards() {
     deck = shuffle(deck);
     var index = 0;
     $.each($(".card i"), function(){
-      $(this).attr("class", "fa " + deck[index]);
+      $(this).find().attr("class", "fa " + deck[index]);
       index++;
     });
-    //resetTimer();
 };
 
 // Remove stars
@@ -158,7 +155,7 @@ function hasWon() {
 };
 
 // Aqui se os cards estão abertos e se teve acerto
-var setMatch = function() {
+const setMatch = function() {
     open.forEach(function(card) {
         card.addClass("match");
     });
@@ -169,7 +166,7 @@ var setMatch = function() {
 };
 
 // Volta os cards ao estado padrão
-var resetOpen = function() {
+const resetOpen = function() {
     open.forEach(function(card) {
         card.toggleClass("open");
         card.toggleClass("show");
@@ -190,7 +187,7 @@ function openCard(card) {
 
 
 // Reseta o game
-var resetGame = function() {
+const resetGame = function() {
     open = [];
     palpites = 0;
     moveCounter = 0;
@@ -201,7 +198,7 @@ var resetGame = function() {
 };
 
 // aqui resolve a logica do game
-var onClick = function() {
+const onClick = function() {
     if (isValid( $(this) )) {
 
         if (open.length === 0) {
@@ -224,7 +221,7 @@ var onClick = function() {
 };
 
 // Redefine o estado do game
-var playAgain = function() {
+const playAgain = function() {
     resetGame();
 };
 
@@ -236,6 +233,4 @@ $(".card").click(onClick);
 $(".restart").click(resetGame);
 $(".play-again").click(playAgain);
 
-// Cards aleatorios
-$(updateCards);
 
