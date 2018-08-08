@@ -1,20 +1,19 @@
 # Memory Game Project
 
-## Table of Contents
+O projeto inicial possui alguns estilos HTML e CSS para exibir uma versão estática do projeto do Jogo da Memória. Foram geradas atualizações para responsividade e interatividade.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Índice
 
-## Instructions
+* [Instrução de como jogar](#instructions)
+* [Contribuição para desenvolvimento do game](#contributing)
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## Instruções
 
-To get started, open `js/app.js` and start building out the app's functionality
+O game é de memorização, você irá receber cartas com simbolos aleatorios e tera
+que tentar casar as cartas com os respetivos simbolos, abra as cartas e tente memorizar onde cada par se encontra.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Contribuição
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+O repositório forked é o código inicial para estudantes _all_ Udacity.
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

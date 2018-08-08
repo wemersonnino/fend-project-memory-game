@@ -166,3 +166,7 @@ and (-webkit-device-pixel-ratio : 3) {
         font-size: 3em;
     }
 }
+
+.center{
+    margin: 0 auto;
+}

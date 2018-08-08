@@ -13,7 +13,7 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length,
-            temporaryValue, randomIndex;
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -38,21 +38,18 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-window.onload = function(){
+window.onload = function() {
     updateCards();
 };
 
 ///* Reload pagina
 let reload = $('.restart');
-reload.on('click', function () {
+reload.on('click', function() {
     location.reload();
 });
 
 ///* Var para obter os cards abertos
 let opened = $('.open');
-
-///* Var para conter os acertos/para as stars
-let hits = 0;
 
 ///* Var para conter numnber de movimentos
 let palpites = 0;
@@ -64,24 +61,26 @@ let stars = false;
 
 let deck = $('deck');
 
+let modal = $("#myModal1");
+
 
 //--------------init logic game-------------------
 
 ///* contando os movimentos
 
 const view = {
-    displayMove: function (move) {
+    displayMove: function(move) {
         //Metodo atualiza o number de moves
         let moves = $('.moves');
         move++;
         moves.text(move);
     },
-    displayHitStars: function (star) {
+    displayHitStars: function(star) {
         //Metodo remove as stars
         let stars = $(star).children();
         stars.remove('li');
     },
-    displayMiss: function (location) {
+    displayMiss: function(location) {
         let card = $('.card');
         card.addClass('open', 'show');
     }
@@ -102,10 +101,18 @@ let medium = 20;
 function updateCards() {
     deck = shuffle(deck);
     var index = 0;
-    $.each($(".card i"), function(){
-      $(this).find().attr("class", "fa " + deck[index]);
-      index++;
+    $.each($(".card i"), function() {
+        $(this).find().attr("class", "fa " + deck[index]);
+        index++;
     });
+};
+
+// Toggles win modal on
+function showModal() {
+    $('#myModal1').modal('show');
+    setTimeout(function() {
+        $('#myModal1').modal('hide')
+    }, 5000);
 };
 
 // Remove stars
@@ -138,7 +145,7 @@ function isValid(card) {
 
 // Retorna se os cartões atualmente abertos correspondem ou não
 function checkMatch() {
-    if (open[0].children().attr("class")===open[1].children().attr("class")) {
+    if (open[0].children().attr("class") === open[1].children().attr("class")) {
         return true;
     } else {
         return false;
@@ -161,8 +168,10 @@ const setMatch = function() {
     });
     open = [];
     palpites += 2;
-
-  
+    if (hasWon()) {
+        showModal();
+        resetGame();
+    }
 };
 
 // Volta os cards ao estado padrão
@@ -199,19 +208,17 @@ const resetGame = function() {
 
 // aqui resolve a logica do game
 const onClick = function() {
-    if (isValid( $(this) )) {
+    if (isValid($(this))) {
 
         if (open.length === 0) {
-            openCard( $(this) );
+            openCard($(this));
 
         } else if (open.length === 1) {
-            openCard( $(this) );
+            openCard($(this));
             moveCounter++;
             updateMoveCounter();
-
             if (checkMatch()) {
                 setTimeout(setMatch, 300);
-
             } else {
                 setTimeout(resetOpen, 700);
 
@@ -223,7 +230,9 @@ const onClick = function() {
 // Redefine o estado do game
 const playAgain = function() {
     resetGame();
+    modal.css("display", "none");
 };
+
 
 /*
  * Lista de event
@@ -232,5 +241,3 @@ const playAgain = function() {
 $(".card").click(onClick);
 $(".restart").click(resetGame);
 $(".play-again").click(playAgain);
-
-

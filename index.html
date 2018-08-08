@@ -1,88 +1,105 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Jogo da Memoria</title>
-        <meta name="description" content="">
-        <link rel="shortcut icon" href="https://www.iconattitude.com/icons/dailyoverview.com/cups_social_icons/png/256/linkedin.png"/>
-        <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-        <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
-        <link rel="stylesheet" href="css/app.css">
-        <link rel="stylesheet" href="css/animate.css">
-    </head>
-    <body>
 
-        <div class="container">
-            <header>
-                <h1>Jogo de Combinações</h1>
-            </header>
+<head>
+    <meta charset="utf-8">
+    <title>Jogo da Memoria</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="shortcut icon" href="https://www.iconattitude.com/icons/dailyoverview.com/cups_social_icons/png/256/linkedin.png" />
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/animate.css">
+</head>
 
-            <section class="score-panel">
-                <ul class="stars">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                </ul>
-
-                <span class="moves">0</span> Movimentos
-
-                <div class="restart">
-                    <i class="fa fa-repeat"></i> Reiniciar
-                </div>
-            </section>
-
-            <ul class="deck">
-                <li class="card">
-                    <i class="fa fa-diamond"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-paper-plane-o"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-anchor"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-bolt"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-cube"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-anchor"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-leaf"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-bicycle"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-diamond"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-bomb"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-leaf"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-bomb"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-bolt"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-bicycle"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-paper-plane-o"></i>
-                </li>
-                <li class="card">
-                    <i class="fa fa-cube"></i>
-                </li>
+<body>
+    <div class="container">
+        <header>
+            <h1>Jogo de Combinações</h1>
+        </header>
+        <section class="score-panel">
+            <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
             </ul>
+            <span class="moves">0</span> Movimentos
+            <div class="restart">
+                <i class="fa fa-repeat"></i> Reiniciar
+            </div>
+        </section>
+        <ul class="deck">
+            <li class="card">
+                <i class="fa fa-diamond"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-paper-plane-o"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-anchor"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bolt"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-cube"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-anchor"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-leaf"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bicycle"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-diamond"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bomb"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-leaf"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bomb"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bolt"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-bicycle"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-paper-plane-o"></i>
+            </li>
+            <li class="card">
+                <i class="fa fa-cube"></i>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div id="myModal1" class="modal hide" tabindex="-1" role="dialog">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3>Você venceu</h3>
+                </div>
+                <div class="modal-body center">
+                    <h1 class="center">Parabens!!!!</h1>
+                    <img class="center" alt="congratulations" src="img/giphy.gif">
+                </div>
+                <div class="modal-footer"></div>
+            </div>
         </div>
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="js/app.js"></script>
-    </body>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+</body>
+
 </html>
