@@ -173,8 +173,8 @@ h1 {
         font-size: 3em;
     }
 }
-
-.center img {
+h1,p{text-align: center;}
+img.center {
     margin: 0 auto;
     width: 100%;
 }

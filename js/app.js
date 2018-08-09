@@ -59,7 +59,7 @@ let isCombined = false;
 
 let stars = false;
 
-let deck = $('deck');
+let deck = $('.deck');
 
 let modal = $("#myModal1");
 
@@ -77,7 +77,7 @@ const view = {
     },
     displayHitStars: function(star) {
         //Metodo remove as stars
-        let stars = $(star).children();
+        let stars = $('ul').children();
         stars.remove('li');
     },
     displayMiss: function(location) {
@@ -112,21 +112,21 @@ function showModal() {
     $('#myModal1').modal('show');
     setTimeout(function() {
         $('#myModal1').modal('hide')
-    }, 5000);
+    }, 3000);
 };
 
 // Remove stars
 function removeStar() {
     $(".stars").last().attr("class", "fa fa-star-o");
     numStars--;
-    $(".stars").text(String(numStars));
+    $("li").text(String(numStars));
 };
 
 // Restaura as stars
 function resetStars() {
-    $(".stars").attr("class", "fa fa-star");
+    $("stars").attr("class", "fa fa-star");
     numStars = 3;
-    $(".stars").text(String(numStars));
+    $("li").text(String(numStars));
 };
 
 // Aqui os movimentos são exibidos 
