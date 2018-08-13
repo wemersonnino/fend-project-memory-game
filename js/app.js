@@ -42,6 +42,10 @@ window.onload = function() {
     updateCards();
 };
 
+let deck = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor",
+           "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
+           "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
+
 ///* Reload pagina
 let reload = $('.restart');
 reload.on('click', function() {
@@ -59,7 +63,7 @@ let isCombined = false;
 
 let stars = false;
 
-let deck = $('.deck');
+//let deck = $('.deck');
 
 let modal = $("#myModal1");
 
@@ -92,6 +96,11 @@ let open = [];
 //var palpites = 0;
 let moveCounter = 0;
 let numStars = 3;
+let timer = {
+    seconds: 0,
+    minutes: 0,
+    clearTime: -1
+};
 
 // Difficulty settings (max number of moves for each star)
 let hard = 15;
@@ -101,10 +110,11 @@ let medium = 20;
 function updateCards() {
     deck = shuffle(deck);
     var index = 0;
-    $.each($(".card i"), function() {
-        $(this).find().attr("class", "fa " + deck[index]);
-        index++;
+    $.each($(".card i"), function(){
+      $(this).attr("class", "fa " + deck[index]);
+      index++;
     });
+    resetTimer();
 };
 
 // Toggles win modal on
@@ -115,18 +125,57 @@ function showModal() {
     }, 3000);
 };
 
+//Função de intervalo a ser chamada a cada segundo, incrementa o timer e atualiza o HTML
+const startTimer = function() {
+    if (timer.seconds === 59) {
+        timer.minutes++;
+        timer.seconds = 0;
+    } else {
+        timer.seconds++;
+    }
+
+    // Ensure that single digit seconds are preceded with a 0
+    var formattedSec = "0";
+    if (timer.seconds < 10) {
+        formattedSec += timer.seconds
+    } else {
+        formattedSec = String(timer.seconds);
+    }
+
+    var time = String(timer.minutes) + ":" + formattedSec;
+    $(".timer").text(time);
+};
+
+//Olha se os segundos de sejam precedidos por um 0
+let formattedSec = "0";
+if (timer.seconds < 10) {
+    formattedSec += timer.seconds
+} else {
+    formattedSec = String(timer.seconds);
+}
+
+//Redefine o estado do temporizador e reinicia-o
+function resetTimer() {
+    clearInterval(timer.clearTime);
+    timer.seconds = 0;
+    timer.minutes = 0;
+    $(".timer").text("0:00");
+
+    timer.clearTime = setInterval(startTimer, 1000);
+}; 
+
 // Remove stars
 function removeStar() {
-    $(".stars").last().attr("class", "fa fa-star-o");
+    $(".fa-star").last().attr("class", "fa fa-star-o");
     numStars--;
-    $("li").text(String(numStars));
+    $(numStars).text(String(numStars));
 };
 
 // Restaura as stars
 function resetStars() {
-    $("stars").attr("class", "fa fa-star");
+    $(".fa-star-o").attr("class", "fa fa-star");
     numStars = 3;
-    $("li").text(String(numStars));
+    $(".stars").text(String(numStars));
 };
 
 // Aqui os movimentos são exibidos 
@@ -169,6 +218,7 @@ const setMatch = function() {
     open = [];
     palpites += 2;
     if (hasWon()) {
+        clearInterval(timer.clearTime);
         showModal();
         resetGame();
     }
@@ -200,6 +250,7 @@ const resetGame = function() {
     open = [];
     palpites = 0;
     moveCounter = 0;
+    resetTimer();
     updateMoveCounter();
     $(".card").attr("class", "card");
     updateCards();
@@ -241,3 +292,6 @@ const playAgain = function() {
 $(".card").click(onClick);
 $(".restart").click(resetGame);
 $(".play-again").click(playAgain);
+
+//card aleatório no carregamento da página
+$(updateCards);
