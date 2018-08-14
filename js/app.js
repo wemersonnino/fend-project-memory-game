@@ -43,15 +43,18 @@ window.onload = function() {
 };
 
 let deck = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor",
-           "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
-           "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"];
+    "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
+    "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"
+];
 
 ///* Reload pagina
 let reload = $('.restart');
 reload.on('click', function() {
     location.reload();
 });
-
+$('#restart').click(function() {
+    $(reload).reload();
+})
 ///* Var para obter os cards abertos
 let opened = $('.open');
 
@@ -110,9 +113,9 @@ let medium = 20;
 function updateCards() {
     deck = shuffle(deck);
     var index = 0;
-    $.each($(".card i"), function(){
-      $(this).attr("class", "fa " + deck[index]);
-      index++;
+    $.each($(".card i"), function() {
+        $(this).attr("class", "fa " + deck[index]);
+        index++;
     });
     resetTimer();
 };
@@ -122,11 +125,11 @@ function showModal() {
     $('#myModal1').modal('show');
     setTimeout(function() {
         $('#myModal1').modal('hide')
-    }, 3000);
+    });
 };
 
 //Função de intervalo a ser chamada a cada segundo, incrementa o timer e atualiza o HTML
-const startTimer = function() {
+let startTimer = function() {
     if (timer.seconds === 59) {
         timer.minutes++;
         timer.seconds = 0;
@@ -135,7 +138,7 @@ const startTimer = function() {
     }
 
     // Ensure that single digit seconds are preceded with a 0
-    var formattedSec = "0";
+    let formattedSec = "0";
     if (timer.seconds < 10) {
         formattedSec += timer.seconds
     } else {
@@ -162,7 +165,7 @@ function resetTimer() {
     $(".timer").text("0:00");
 
     timer.clearTime = setInterval(startTimer, 1000);
-}; 
+};
 
 // Remove stars
 function removeStar() {
