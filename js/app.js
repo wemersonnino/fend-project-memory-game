@@ -42,10 +42,12 @@ window.onload = function() {
     updateCards();
 };
 
-let deck = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor",
+let cards = ["fa-diamond", "fa-diamond", "fa-paper-plane-o", "fa-paper-plane-o", "fa-anchor", "fa-anchor",
     "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf",
     "fa-bicycle", "fa-bicycle", "fa-bomb", "fa-bomb"
 ];
+let deck= [...cards];
+console.log(deck);
 
 ///* Reload pagina
 let reload = $('.restart');
@@ -73,25 +75,6 @@ let modal = $("#myModal1");
 
 //--------------init logic game-------------------
 
-///* contando os movimentos
-
-const view = {
-    displayMove: function(move) {
-        //Metodo atualiza o number de moves
-        let moves = $('.moves');
-        move++;
-        moves.text(move);
-    },
-    displayHitStars: function(star) {
-        //Metodo remove as stars
-        let stars = $('ul').children();
-        stars.remove('li');
-    },
-    displayMiss: function(location) {
-        let card = $('.card');
-        card.addClass('open', 'show');
-    }
-};
 
 
 // Vars do game
@@ -105,7 +88,7 @@ let timer = {
     clearTime: -1
 };
 
-// Difficulty settings (max number of moves for each star)
+// Configurações de dificuldade (número máximo de movimentos para cada estrela)
 let hard = 15;
 let medium = 20;
 
@@ -124,7 +107,9 @@ function updateCards() {
 function showModal() {
     $('#myModal1').modal('show');
     setTimeout(function() {
-        $('#myModal1').modal('hide')
+        $('#myModal1').modal('hide');
+        //resetTimer();
+        //resetGame();
     });
 };
 
@@ -137,10 +122,10 @@ let startTimer = function() {
         timer.seconds++;
     }
 
-    // Ensure that single digit seconds are preceded with a 0
+    // Certifica que os segundos de dígito único sejam precedidos por um 0
     let formattedSec = "0";
     if (timer.seconds < 10) {
-        formattedSec += timer.seconds
+        formattedSec += timer.seconds;
     } else {
         formattedSec = String(timer.seconds);
     }
@@ -152,7 +137,7 @@ let startTimer = function() {
 //Olha se os segundos de sejam precedidos por um 0
 let formattedSec = "0";
 if (timer.seconds < 10) {
-    formattedSec += timer.seconds
+    formattedSec += timer.seconds;
 } else {
     formattedSec = String(timer.seconds);
 }
@@ -171,14 +156,14 @@ function resetTimer() {
 function removeStar() {
     $(".fa-star").last().attr("class", "fa fa-star-o");
     numStars--;
-    $(numStars).text(String(numStars));
+    $('.regStars').text(String(numStars));
 };
 
 // Restaura as stars
 function resetStars() {
     $(".fa-star-o").attr("class", "fa fa-star");
     numStars = 3;
-    $(".stars").text(String(numStars));
+    $(".regStars").text(String(numStars));
 };
 
 // Aqui os movimentos são exibidos 
@@ -223,7 +208,7 @@ const setMatch = function() {
     if (hasWon()) {
         clearInterval(timer.clearTime);
         showModal();
-        resetGame();
+        //resetGame();
     }
 };
 
@@ -298,3 +283,29 @@ $(".play-again").click(playAgain);
 
 //card aleatório no carregamento da página
 $(updateCards);
+
+///* contando os movimentos
+
+const view = {
+    displayMove: function(move) {
+        //Metodo atualiza o number de moves
+        let moves = $('.moves');
+        move++;
+        moves.html(move).text('0');
+        let str = $("span.movesResult");
+        str.html(move).text(updateMoveCounter);
+        console.log(str);
+        //$('span .moves').text(moves);
+    },
+    displayHitStars: function(star) {
+        //Metodo remove as stars
+        let stars = $('ul').children();
+        stars.remove('li');
+    },
+    displayMiss: function(location) {
+        let card = $('.card');
+        card.addClass('open', 'show');
+    }
+};
+
+view.displayMove();
