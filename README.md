@@ -11,6 +11,7 @@ O projeto inicial possui alguns estilos HTML e CSS para exibir uma versão está
 
 O game é de memorização, você irá receber cartas com simbolos aleatorios e tera
 que tentar casar as cartas com os respetivos simbolos, abra as cartas e tente memorizar onde cada par se encontra.
+Receba ao final informações de seu desenpenho 
 
 - Para execultar esse game:
 Baixo os arquivos e execulte o `HTML`
